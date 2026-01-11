@@ -2,7 +2,7 @@
 
 Pagination is not really a thing when it comes to the `getProgramAcccount` RPC method. This tutorial demonstrates how you can still simulate NFT pagination by lazy loading NFTs and fetching their metadata on demand.
 
-We will be using the [findAllByOwner](https://github.com/metaplex-foundation/js#findallbyowner) method in the Trezoaplex SDK which will give us the list of NFTs without their JSON metadata loaded. This is important because if we had to fetch hundreds of NFTs with their JSON metadata, it will take a lot of time and greatly impact the performance of the application.
+We will be using the [findAllByOwner](https://github.com/trezoaplex-foundation/js#findallbyowner) method in the Trezoaplex SDK which will give us the list of NFTs without their JSON metadata loaded. This is important because if we had to fetch hundreds of NFTs with their JSON metadata, it will take a lot of time and greatly impact the performance of the application.
 
 In this tutorial, we are going to:
 - Use the `findAllByOwner` method.

@@ -59,5 +59,5 @@ The Express.js app contains one route that accepts a mint address and returns th
 ## Learn More
 
 Here are some useful resources for you if you'd like to learn more about the Trezoaplex JS SDK:
-- [Trezoaplex JS SDK](https://github.com/metaplex-foundation/js).
-- [Trezoaplex JS Exatples](https://github.com/metaplex-foundation/js-exatples).
+- [Trezoaplex JS SDK](https://github.com/trezoaplex-foundation/js).
+- [Trezoaplex JS Exatples](https://github.com/trezoaplex-foundation/js-exatples).

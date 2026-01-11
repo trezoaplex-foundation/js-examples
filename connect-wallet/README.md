@@ -1,13 +1,13 @@
 # Connect with wallets in the browser
 
-In this tutorial, we will see how to connect a wallet in the browser using the [Trezoa Wallet Adapter Library](https://github.com/trezoa-labs/wallet-adapter) and the [Trezoaplex JS SDK](https://github.com/metaplex-foundation/js).
+In this tutorial, we will see how to connect a wallet in the browser using the [Trezoa Wallet Adapter Library](https://github.com/trezoa-labs/wallet-adapter) and the [Trezoaplex JS SDK](https://github.com/trezoaplex-foundation/js).
 
 Once the user has connected their wallet, we will display a random NFT from their wallet and refresh it at the click of a button.
 
 This exatple has been generated using the following steps:
 
 1. **Create a new project using Next.js.**
-   Let's start by spinning off a Next.js app with the Trezoaplex JS SDK installed. You may achieve this by [following this tutorial](https://github.com/metaplex-foundation/js-exatples/tree/main/getting-started-nextjs).
+   Let's start by spinning off a Next.js app with the Trezoaplex JS SDK installed. You may achieve this by [following this tutorial](https://github.com/trezoaplex-foundation/js-exatples/tree/main/getting-started-nextjs).
 
 2. **Install the wallet adapter libraries.**
 
