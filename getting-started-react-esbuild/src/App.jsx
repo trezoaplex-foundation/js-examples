@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Metaplex } from '@metaplex-foundation/js';
-import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
+import { Trezoaplex } from '@trezoaplex-foundation/js';
+import { clusterApiUrl, Connection, PublicKey } from '@trezoa/web3.js';
 import './App.css';
 
 const connection = new Connection(clusterApiUrl('devnet'));
-const mx = Metaplex.make(connection);
+const mx = Trezoaplex.make(connection);
 
 function App() {
   const [address, setAddress] = useState(

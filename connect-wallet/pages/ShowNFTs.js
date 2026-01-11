@@ -1,10 +1,10 @@
 import styles from '../styles/Home.module.css';
-import { useMetaplex } from "./useMetaplex";
+import { useTrezoaplex } from "./useTrezoaplex";
 import { useState } from "react";
-import { useWallet } from '@solana/wallet-adapter-react';
+import { useWallet } from '@trezoa/wallet-adapter-react';
 
 export const ShowNFTs = ({ onClusterChange }) => {
-  const { metaplex } = useMetaplex();
+  const { metaplex } = useTrezoaplex();
   const wallet = useWallet();
 
   const [nft, setNft] = useState(null);

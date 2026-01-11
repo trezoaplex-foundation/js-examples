@@ -1,11 +1,11 @@
 import styles from "../styles/Home.module.css";
-import { useMetaplex } from "./useMetaplex";
+import { useTrezoaplex } from "./useTrezoaplex";
 import { useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
+import { useWallet } from "@trezoa/wallet-adapter-react";
+import { PublicKey } from "@trezoa/web3.js";
 
 export const MintNFTs = ({ onClusterChange }) => {
-  const { metaplex } = useMetaplex();
+  const { trezoaplex } = useTrezoaplex();
   const wallet = useWallet();
 
   const [nft, setNft] = useState(null);
@@ -20,22 +20,22 @@ export const MintNFTs = ({ onClusterChange }) => {
 
   const addListener = async () => {
     // add a listener to monitor changes to the candy guard
-    metaplex.connection.onAccountChange(candyMachine.candyGuard.address,
+    trezoaplex.connection.onAccountChange(candyMachine.candyGuard.address,
       () => checkEligibility()
     );
 
     // add a listener to monitor changes to the user's wallet
-    metaplex.connection.onAccountChange(metaplex.identity().publicKey,
+    trezoaplex.connection.onAccountChange(trezoaplex.identity().publicKey,
       () => checkEligibility()
     );
 
     // add a listener to reevaluate if the user is allowed to mint if startDate is reached
-    const slot = await metaplex.connection.getSlot();
-    const solanaTime = await metaplex.connection.getBlockTime(slot);
+    const slot = await trezoaplex.connection.getSlot();
+    const trezoaTime = await trezoaplex.connection.getBlockTime(slot);
     const startDateGuard = candyMachine.candyGuard.guards.startDate;
     if (startDateGuard != null) {
       const candyStartDate = startDateGuard.date.toString(10);
-      const refreshTime = candyStartDate - solanaTime.toString(10);
+      const refreshTime = candyStartDate - trezoaTime.toString(10);
       if (refreshTime > 0) {
         setTimeout(() => checkEligibility(), refreshTime * 1000);
       }
@@ -45,7 +45,7 @@ export const MintNFTs = ({ onClusterChange }) => {
     const endDateGuard = candyMachine.candyGuard.guards.endDate;
     if (endDateGuard != null) {
       const candyEndDate = endDateGuard.date.toString(10);
-      const refreshTime = solanaTime.toString(10) - candyEndDate;
+      const refreshTime = trezoaTime.toString(10) - candyEndDate;
       if (refreshTime > 0) {
         setTimeout(() => checkEligibility(), refreshTime * 1000);
       }
@@ -60,7 +60,7 @@ export const MintNFTs = ({ onClusterChange }) => {
     }
 
     // read candy machine state from chain
-    candyMachine = await metaplex
+    candyMachine = await trezoaplex
       .candyMachines()
       .findByAddress({ address: candyMachineAddress });
 
@@ -75,16 +75,16 @@ export const MintNFTs = ({ onClusterChange }) => {
       return;
     }
 
-    // guard checks have to be done for the relevant guard group! Example is for the default groups defined in Part 1 of the CM guide
+    // guard checks have to be done for the relevant guard group! Exatple is for the default groups defined in Part 1 of the CM guide
     const guard = candyMachine.candyGuard.guards;
 
-    // Calculate current time based on Solana BlockTime which the on chain program is using - startTime and endTime guards will need that
-    const slot = await metaplex.connection.getSlot();
-    const solanaTime = await metaplex.connection.getBlockTime(slot);
+    // Calculate current time based on Trezoa BlockTime which the on chain program is using - startTime and endTime guards will need that
+    const slot = await trezoaplex.connection.getSlot();
+    const trezoaTime = await trezoaplex.connection.getBlockTime(slot);
 
     if (guard.startDate != null) {
       const candyStartDate = guard.startDate.date.toString(10);
-      if (solanaTime < candyStartDate) {
+      if (trezoaTime < candyStartDate) {
         console.error("startDate: CM not live yet");
         setDisableMint(true);
         return;
@@ -93,7 +93,7 @@ export const MintNFTs = ({ onClusterChange }) => {
 
     if (guard.endDate != null) {
       const candyEndDate = guard.endDate.date.toString(10);
-      if (solanaTime > candyEndDate) {
+      if (trezoaTime > candyEndDate) {
         console.error("endDate: CM not live anymore");
         setDisableMint(true);
         return;
@@ -101,7 +101,7 @@ export const MintNFTs = ({ onClusterChange }) => {
     }
 
     if (guard.addressGate != null) {
-      if (metaplex.identity().publicKey.toBase58() != guard.addressGate.address.toBase58()) {
+      if (trezoaplex.identity().publicKey.toBase58() != guard.addressGate.address.toBase58()) {
         console.error("addressGate: You are not allowed to mint");
         setDisableMint(true);
         return;
@@ -109,14 +109,14 @@ export const MintNFTs = ({ onClusterChange }) => {
     }
 
     if (guard.mintLimit != null) {
-      const mitLimitCounter = metaplex.candyMachines().pdas().mintLimitCounter({
+      const mitLimitCounter = trezoaplex.candyMachines().pdas().mintLimitCounter({
         id: guard.mintLimit.id,
-        user: metaplex.identity().publicKey,
+        user: trezoaplex.identity().publicKey,
         candyMachine: candyMachine.address,
         candyGuard: candyMachine.candyGuard.address,
       });
       //Read Data from chain
-      const mintedAmountBuffer = await metaplex.connection.getAccountInfo(mitLimitCounter, "processed");
+      const mintedAmountBuffer = await trezoaplex.connection.getAccountInfo(mitLimitCounter, "processed");
       let mintedAmount;
       if (mintedAmountBuffer != null) {
         mintedAmount = mintedAmountBuffer.data.readUintLE(0, 1);
@@ -129,35 +129,35 @@ export const MintNFTs = ({ onClusterChange }) => {
     }
 
     if (guard.solPayment != null) {
-      walletBalance = await metaplex.connection.getBalance(
-        metaplex.identity().publicKey
+      walletBalance = await trezoaplex.connection.getBalance(
+        trezoaplex.identity().publicKey
       );
 
       const costInLamports = guard.solPayment.amount.basisPoints.toString(10);
 
       if (costInLamports > walletBalance) {
-        console.error("solPayment: Not enough SOL!");
+        console.error("solPayment: Not enough TRZ!");
         setDisableMint(true);
         return;
       }
     }
 
     if (guard.freezeSolPayment != null) {
-      walletBalance = await metaplex.connection.getBalance(
-        metaplex.identity().publicKey
+      walletBalance = await trezoaplex.connection.getBalance(
+        trezoaplex.identity().publicKey
       );
 
       const costInLamports = guard.freezeSolPayment.amount.basisPoints.toString(10);
 
       if (costInLamports > walletBalance) {
-        console.error("freezeSolPayment: Not enough SOL!");
+        console.error("freezeSolPayment: Not enough TRZ!");
         setDisableMint(true);
         return;
       }
     }
 
     if (guard.nftGate != null) {
-      const ownedNfts = await metaplex.nfts().findAllByOwner({ owner: metaplex.identity().publicKey });
+      const ownedNfts = await trezoaplex.nfts().findAllByOwner({ owner: trezoaplex.identity().publicKey });
       const nftsInCollection = ownedNfts.filter(obj => {
         return (obj.collection?.address.toBase58() === guard.nftGate.requiredCollection.toBase58()) && (obj.collection?.verified === true);
       });
@@ -169,7 +169,7 @@ export const MintNFTs = ({ onClusterChange }) => {
     }
 
     if (guard.nftBurn != null) {
-      const ownedNfts = await metaplex.nfts().findAllByOwner({ owner: metaplex.identity().publicKey });
+      const ownedNfts = await trezoaplex.nfts().findAllByOwner({ owner: trezoaplex.identity().publicKey });
       const nftsInCollection = ownedNfts.filter(obj => {
         return (obj.collection?.address.toBase58() === guard.nftBurn.requiredCollection.toBase58()) && (obj.collection?.verified === true);
       });
@@ -181,7 +181,7 @@ export const MintNFTs = ({ onClusterChange }) => {
     }
 
     if (guard.nftPayment != null) {
-      const ownedNfts = await metaplex.nfts().findAllByOwner({ owner: metaplex.identity().publicKey });
+      const ownedNfts = await trezoaplex.nfts().findAllByOwner({ owner: trezoaplex.identity().publicKey });
       const nftsInCollection = ownedNfts.filter(obj => {
         return (obj.collection?.address.toBase58() === guard.nftPayment.requiredCollection.toBase58()) && (obj.collection?.verified === true);
       });
@@ -201,38 +201,38 @@ export const MintNFTs = ({ onClusterChange }) => {
     }
 
     if (guard.tokenBurn != null) {
-      const ata = await metaplex.tokens().pdas().associatedTokenAccount({ mint: guard.tokenBurn.mint, owner: metaplex.identity().publicKey });
-      const balance = await metaplex.connection.getTokenAccountBalance(ata);
+      const ata = await trezoaplex.tokens().pdas().associatedTokenAccount({ mint: guard.tokenBurn.mint, owner: trezoaplex.identity().publicKey });
+      const balance = await trezoaplex.connection.getTokenAccountBalance(ata);
       if (balance < guard.tokenBurn.amount.basisPoints.toNumber()) {
-        console.error("tokenBurn: Not enough SPL tokens to burn!");
+        console.error("tokenBurn: Not enough TPL tokens to burn!");
         setDisableMint(true);
         return;
       }
     }
 
     if (guard.tokenGate != null) {
-      const ata = await metaplex.tokens().pdas().associatedTokenAccount({ mint: guard.tokenGate.mint, owner: metaplex.identity().publicKey });
-      const balance = await metaplex.connection.getTokenAccountBalance(ata);
+      const ata = await trezoaplex.tokens().pdas().associatedTokenAccount({ mint: guard.tokenGate.mint, owner: trezoaplex.identity().publicKey });
+      const balance = await trezoaplex.connection.getTokenAccountBalance(ata);
       if (balance < guard.tokenGate.amount.basisPoints.toNumber()) {
-        console.error("tokenGate: Not enough SPL tokens!");
+        console.error("tokenGate: Not enough TPL tokens!");
         setDisableMint(true);
         return;
       }
     }
 
     if (guard.tokenPayment != null) {
-      const ata = await metaplex.tokens().pdas().associatedTokenAccount({ mint: guard.tokenPayment.mint, owner: metaplex.identity().publicKey });
-      const balance = await metaplex.connection.getTokenAccountBalance(ata);
+      const ata = await trezoaplex.tokens().pdas().associatedTokenAccount({ mint: guard.tokenPayment.mint, owner: trezoaplex.identity().publicKey });
+      const balance = await trezoaplex.connection.getTokenAccountBalance(ata);
       if (balance < guard.tokenPayment.amount.basisPoints.toNumber()) {
-        console.error("tokenPayment: Not enough SPL tokens to pay!");
+        console.error("tokenPayment: Not enough TPL tokens to pay!");
         setDisableMint(true);
         return;
       }
       if (guard.freezeTokenPayment != null) {
-        const ata = await metaplex.tokens().pdas().associatedTokenAccount({ mint: guard.freezeTokenPayment.mint, owner: metaplex.identity().publicKey });
-        const balance = await metaplex.connection.getTokenAccountBalance(ata);
+        const ata = await trezoaplex.tokens().pdas().associatedTokenAccount({ mint: guard.freezeTokenPayment.mint, owner: trezoaplex.identity().publicKey });
+        const balance = await trezoaplex.connection.getTokenAccountBalance(ata);
         if (balance < guard.tokenPayment.amount.basisPoints.toNumber()) {
-          console.error("freezeTokenPayment: Not enough SPL tokens to pay!");
+          console.error("freezeTokenPayment: Not enough TPL tokens to pay!");
           setDisableMint(true);
           return;
         }
@@ -261,8 +261,8 @@ export const MintNFTs = ({ onClusterChange }) => {
 
   const onClick = async () => {
     // Here the actual mint happens. Depending on the guards that you are using you have to run some pre validation beforehand 
-    // Read more: https://docs.metaplex.com/programs/candy-machine/minting#minting-with-pre-validation
-    const { nft } = await metaplex.candyMachines().mint({
+    // Read more: https://docs.trezoaplex.com/programs/candy-machine/minting#minting-with-pre-validation
+    const { nft } = await trezoaplex.candyMachines().mint({
       candyMachine,
       collectionUpdateAuthority: candyMachine.authorityAddress,
     });

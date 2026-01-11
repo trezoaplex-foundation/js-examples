@@ -2,7 +2,7 @@
 
 Pagination is not really a thing when it comes to the `getProgramAcccount` RPC method. This tutorial demonstrates how you can still simulate NFT pagination by lazy loading NFTs and fetching their metadata on demand.
 
-We will be using the [findAllByOwner](https://github.com/metaplex-foundation/js#findallbyowner) method in the Metaplex SDK which will give us the list of NFTs without their JSON metadata loaded. This is important because if we had to fetch hundreds of NFTs with their JSON metadata, it will take a lot of time and greatly impact the performance of the application.
+We will be using the [findAllByOwner](https://github.com/metaplex-foundation/js#findallbyowner) method in the Trezoaplex SDK which will give us the list of NFTs without their JSON metadata loaded. This is important because if we had to fetch hundreds of NFTs with their JSON metadata, it will take a lot of time and greatly impact the performance of the application.
 
 In this tutorial, we are going to:
 - Use the `findAllByOwner` method.
@@ -17,7 +17,7 @@ Note that you can find all the code below in this [`pages/index.js` file](./page
 
 1. **Create a new Next.js app.**
 
-   This example uses a new NextJS app with Metaplex which can be created by following the instructions listed in [Getting Started with Metaplex and Next.js](../getting-started-nextjs).
+   This exatple uses a new NextJS app with Trezoaplex which can be created by following the instructions listed in [Getting Started with Trezoaplex and Next.js](../getting-started-nextjs).
 
 2. **Fetch all NFTs of a given wallet without their JSON metadata.**
 
@@ -36,7 +36,7 @@ Note that you can find all the code below in this [`pages/index.js` file](./page
       }
    };
    ```
-   This sets the `Loading` state to true, invalidates the current view and calls the `findAllByOwner` method of the Metaplex SDK with the wallet address as input.
+   This sets the `Loading` state to true, invalidates the current view and calls the `findAllByOwner` method of the Trezoaplex SDK with the wallet address as input.
 
    The returned data is then set to the `nftList` state and the current page is reset to the first page since we will be displaying a new list of NFTs.
 
@@ -84,7 +84,7 @@ Note that you can find all the code below in this [`pages/index.js` file](./page
 
 5. **That's it!** 🎉
 
-   Congrats, you've now got a simple app that displays the NFTs inside a wallet. Let's see the final output!
+   Congrats, you've now got a sitple app that displays the NFTs inside a wallet. Let's see the final output!
 
    Landing Screen
    ![image](./output1.png)

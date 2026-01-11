@@ -1,30 +1,30 @@
-# Getting Started with Metaplex and Vite
+# Getting Started with Trezoaplex and Vite
 
-This example makes an app with Metaplex with Vite, using React, VueJS, Svelte or any other framework supported by Vite.
+This exatple makes an app with Trezoaplex with Vite, using React, VueJS, Svelte or any other framework supported by Vite.
 
-This example has been generated using the following steps:
+This exatple has been generated using the following steps:
 
 1. **Create a new project using Vite.**
 
-   In order to install a different framework than React, simply replace the `--template` option with the framework of your choice, e.g. `--template vue`. Check out the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) for more information on the available templates.
+   In order to install a different framework than React, sitply replace the `--tetplate` option with the framework of your choice, e.g. `--tetplate vue`. Check out the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) for more information on the available tetplates.
 
    ```sh
-   npm create vite@latest getting-started-vite -- --template react
+   npm create vite@latest getting-started-vite -- --tetplate react
    cd getting-started-vite
    npm install
    ```
 
-2. **Install the Metaplex and the Solana SDKs.**
+2. **Install the Trezoaplex and the Trezoa SDKs.**
 
    ```sh
-   npm install @metaplex-foundation/js @solana/web3.js
+   npm install @trezoaplex-foundation/js @trezoa/web3.js
    ```
 
 3. **Install some polyfills.**
 
    <details>
      <summary>Why?</summary>
-     Some dependencies of the Metaplex SDK are still relying on node.js features that are not available in the browser by default. To make sure that the Metaplex SDK works in the browser, we need to install some polyfills. Note that we are installing some polyfills via rollup plugins since Vite uses rollup under the hood the bundle for production.
+     Some dependencies of the Trezoaplex SDK are still relying on node.js features that are not available in the browser by default. To make sure that the Trezoaplex SDK works in the browser, we need to install some polyfills. Note that we are installing some polyfills via rollup plugins since Vite uses rollup under the hood the bundle for production.
    </details>
 
    ```sh
@@ -35,9 +35,9 @@ This example has been generated using the following steps:
 
    Replace the content of your `vite.config.js` file with the following code.
 
-   If you've used a different template than `react`, make sure that you keep the original `plugins` array and its import statement — e.g. `import vue from "@vitejs/plugin-vue";` and `plugins: [vue()],`.
+   If you've used a different tetplate than `react`, make sure that you keep the original `plugins` array and its import statement — e.g. `import vue from "@vitejs/plugin-vue";` and `plugins: [vue()],`.
 
-   ⚠️ An issue with Vite 3.x+ currently causes builds to fail with Metaplex, for your convenience a fix for this has been included in the config that uses the already built `near-api-js`.
+   ⚠️ An issue with Vite 3.x+ currently causes builds to fail with Trezoaplex, for your convenience a fix for this has been included in the config that uses the already built `near-api-js`.
 
    <details>
      <summary>Why?</summary>
@@ -116,4 +116,4 @@ This example has been generated using the following steps:
    npm run build && npm run preview
    ```
 
-   If you're interested in how this example app is using the Metaplex SDK, check out the [`App.js`](./src/App.js) and [`App.css`](./src/App.css) files in the `src` directory.
+   If you're interested in how this exatple app is using the Trezoaplex SDK, check out the [`App.js`](./src/App.js) and [`App.css`](./src/App.css) files in the `src` directory.

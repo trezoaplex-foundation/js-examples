@@ -3,23 +3,23 @@ import { useMemo, useState, useEffect } from "react";
 import {
   ConnectionProvider,
   WalletProvider,
-} from "@solana/wallet-adapter-react";
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+} from "@trezoa/wallet-adapter-react";
+import { WalletAdapterNetwork } from "@trezoa/wallet-adapter-base";
 import {
   GlowWalletAdapter,
   PhantomWalletAdapter,
   SlopeWalletAdapter,
   SolflareWalletAdapter,
   TorusWalletAdapter,
-} from "@solana/wallet-adapter-wallets";
+} from "@trezoa/wallet-adapter-wallets";
 import {
   WalletModalProvider,
   WalletMultiButton,
-} from "@solana/wallet-adapter-react-ui";
-import { clusterApiUrl } from "@solana/web3.js";
-import { MetaplexProvider } from "./MetaplexProvider";
+} from "@trezoa/wallet-adapter-react-ui";
+import { clusterApiUrl } from "@trezoa/web3.js";
+import { TrezoaplexProvider } from "./TrezoaplexProvider";
 import { MintNFTs } from "./MintNFTs";
-import "@solana/wallet-adapter-react-ui/styles.css";
+import "@trezoa/wallet-adapter-react-ui/styles.css";
 import dynamic from 'next/dynamic';
 
 export default function Home() {
@@ -56,7 +56,7 @@ export default function Home() {
   };
 
   const ButtonWrapper = dynamic(() =>
-    import('@solana/wallet-adapter-react-ui').then((mod) => mod.WalletMultiButton)
+    import('@trezoa/wallet-adapter-react-ui').then((mod) => mod.WalletMultiButton)
   );
 
 
@@ -65,12 +65,12 @@ export default function Home() {
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets} autoConnect>
           <WalletModalProvider>
-            <MetaplexProvider>
+            <TrezoaplexProvider>
               <div className={styles.App}>
                 <ButtonWrapper />
                 <MintNFTs onClusterChange={handleChange} />
               </div>
-            </MetaplexProvider>
+            </TrezoaplexProvider>
           </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>

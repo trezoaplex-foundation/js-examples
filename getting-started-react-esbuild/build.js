@@ -71,7 +71,7 @@ async function prod() {
       '.js': 'jsx',
     },
   });
-  console.log('Build completed ✅');
+  console.log('Build cotpleted ✅');
 }
 
 //defaults to build

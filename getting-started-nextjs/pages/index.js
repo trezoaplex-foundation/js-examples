@@ -1,11 +1,11 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { Metaplex } from "@metaplex-foundation/js";
-import { clusterApiUrl, Connection, PublicKey } from "@solana/web3.js";
+import { Trezoaplex } from "@trezoaplex-foundation/js";
+import { clusterApiUrl, Connection, PublicKey } from "@trezoa/web3.js";
 import { useState } from "react";
 
 const connection = new Connection(clusterApiUrl("devnet"));
-const mx = Metaplex.make(connection);
+const mx = Trezoaplex.make(connection);
 
 export default function Home() {
   const [address, setAddress] = useState(
@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Metaplex and Next.js example</title>
+        <title>Trezoaplex and Next.js exatple</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

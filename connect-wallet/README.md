@@ -1,62 +1,62 @@
 # Connect with wallets in the browser
 
-In this tutorial, we will see how to connect a wallet in the browser using the [Solana Wallet Adapter Library](https://github.com/solana-labs/wallet-adapter) and the [Metaplex JS SDK](https://github.com/metaplex-foundation/js).
+In this tutorial, we will see how to connect a wallet in the browser using the [Trezoa Wallet Adapter Library](https://github.com/trezoa-labs/wallet-adapter) and the [Trezoaplex JS SDK](https://github.com/metaplex-foundation/js).
 
 Once the user has connected their wallet, we will display a random NFT from their wallet and refresh it at the click of a button.
 
-This example has been generated using the following steps:
+This exatple has been generated using the following steps:
 
 1. **Create a new project using Next.js.**
-   Let's start by spinning off a Next.js app with the Metaplex JS SDK installed. You may achieve this by [following this tutorial](https://github.com/metaplex-foundation/js-examples/tree/main/getting-started-nextjs).
+   Let's start by spinning off a Next.js app with the Trezoaplex JS SDK installed. You may achieve this by [following this tutorial](https://github.com/metaplex-foundation/js-exatples/tree/main/getting-started-nextjs).
 
 2. **Install the wallet adapter libraries.**
 
    ```sh
-   npm install @solana/wallet-adapter-base \
-      @solana/wallet-adapter-react \
-      @solana/wallet-adapter-react-ui \
-      @solana/wallet-adapter-wallets
+   npm install @trezoa/wallet-adapter-base \
+      @trezoa/wallet-adapter-react \
+      @trezoa/wallet-adapter-react-ui \
+      @trezoa/wallet-adapter-wallets
    ```
 
-3. **Create the `pages/useMetaplex.js` file.**
+3. **Create the `pages/useTrezoaplex.js` file.**
 
-   The `useMetaplex.js` file is responsible for creating and exposing a new Metaplex Context which will be used within our components to access the Metaplex SDK.
+   The `useTrezoaplex.js` file is responsible for creating and exposing a new Trezoaplex Context which will be used within our components to access the Trezoaplex SDK.
 
    ```js
    const DEFAULT_CONTEXT = {
      metaplex: null,
    };
 
-   export const MetaplexContext = createContext(DEFAULT_CONTEXT);
+   export const TrezoaplexContext = createContext(DEFAULT_CONTEXT);
 
-   export function useMetaplex() {
-     return useContext(MetaplexContext);
+   export function useTrezoaplex() {
+     return useContext(TrezoaplexContext);
    }
    ```
 
-4. **Create the `pages/MetaplexProvider.js` file.**
+4. **Create the `pages/TrezoaplexProvider.js` file.**
 
-   The `MetaplexProvider` component uses the wallet provided by the `WalletProvider` component to define the Metaplex Context previously created.
+   The `TrezoaplexProvider` component uses the wallet provided by the `WalletProvider` component to define the Trezoaplex Context previously created.
 
    ```js
-   export const MetaplexProvider = ({ children }) => {
+   export const TrezoaplexProvider = ({ children }) => {
      const { connection } = useConnection();
      const wallet = useWallet();
 
      const metaplex = useMemo(
-       () => Metaplex.make(connection).use(walletAdapterIdentity(wallet)),
+       () => Trezoaplex.make(connection).use(walletAdapterIdentity(wallet)),
        [connection, wallet]
      );
 
      return (
-       <MetaplexContext.Provider value={{ metaplex }}>
+       <TrezoaplexContext.Provider value={{ metaplex }}>
          {children}
-       </MetaplexContext.Provider>
+       </TrezoaplexContext.Provider>
      );
    };
    ```
 
-   As you can see, it uses the `walletOrGuestIdentity` plugin so that the identity of the Metaplex SDK is set to "guest" when the wallet is not yet connected.
+   As you can see, it uses the `walletOrGuestIdentity` plugin so that the identity of the Trezoaplex SDK is set to "guest" when the wallet is not yet connected.
 
 5. **Create the `pages/ShowNFTs.js` file**
 
@@ -83,7 +83,7 @@ This example has been generated using the following steps:
 6. **That's it!** 🎉
    You're now ready to start building your app whilst having access to the user's wallet!
 
-   Note that now that the wallet has been integrated with the Metaplex JS SDK, you can use all of its features on behalf of the user and it will request their approval every time they need to send a transaction or sign a message.
+   Note that now that the wallet has been integrated with the Trezoaplex JS SDK, you can use all of its features on behalf of the user and it will request their approval every time they need to send a transaction or sign a message.
 
    Let's see a few screenshots of the final result!
 

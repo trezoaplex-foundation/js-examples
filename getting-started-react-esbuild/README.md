@@ -1,12 +1,12 @@
-# Getting Started with Metaplex and Esbuild
+# Getting Started with Trezoaplex and Esbuild
 
-This example sets up a new React app with Metaplex using Esbuild.
+This exatple sets up a new React app with Trezoaplex using Esbuild.
 
-This example has been generated using the following steps:
+This exatple has been generated using the following steps:
 
 1. **Create a new project using NPM.**
 
-   Esbuild does not have any standard template for React which can be utilized for initializing the project like CRA or Vite. So, we will be creating an empty npm project and setup everything from scratch.
+   Esbuild does not have any standard tetplate for React which can be utilized for initializing the project like CRA or Vite. So, we will be creating an empty npm project and setup everything from scratch.
 
    ```sh
    mkdir getting-started-react-esbuild
@@ -28,17 +28,17 @@ This example has been generated using the following steps:
    └── package.json
    ```
 
-2. **Install React, EsBuild and the Metaplex SDK.**
+2. **Install React, EsBuild and the Trezoaplex SDK.**
 
    ```sh
-   npm install react react-dom esbuild @metaplex-foundation/js @solana/web3.js
+   npm install react react-dom esbuild @trezoaplex-foundation/js @trezoa/web3.js
    ```
 
 3. **Install some polyfills.**
 
    <details>
      <summary>Why?</summary>
-     Some dependencies of the Metaplex SDK are still relying on NPM packages that are not available in the browser. To make sure that the Metaplex SDK works in the browser, we need to install some polyfills.
+     Some dependencies of the Trezoaplex SDK are still relying on NPM packages that are not available in the browser. To make sure that the Trezoaplex SDK works in the browser, we need to install some polyfills.
    </details>
 
    ```sh
@@ -139,7 +139,7 @@ This example has been generated using the following steps:
          '.js': 'jsx',
        },
      });
-     console.log('Build completed ✅');
+     console.log('Build cotpleted ✅');
    }
 
    //defaults to build
@@ -178,8 +178,8 @@ This example has been generated using the following steps:
        <meta charset="utf-8" />
        <meta name="viewport" content="width=device-width, initial-scale=1" />
        <meta name="theme-color" content="#000000" />
-       <meta name="description" content="EsBuild + Metaplex" />
-       <title>EsBuild + Metaplex</title>
+       <meta name="description" content="EsBuild + Trezoaplex" />
+       <title>EsBuild + Trezoaplex</title>
        <script src="index.js" async defer></script>
        <link rel="stylesheet" href="index.css" />
      </head>
@@ -202,4 +202,4 @@ This example has been generated using the following steps:
    npm run build
    ```
 
-   If you're interested in how this example app is using the Metaplex SDK, check out the [`App.jsx`](./src/App.jsx) and [`App.css`](./src/App.css) files in the `src` directory.
+   If you're interested in how this exatple app is using the Trezoaplex SDK, check out the [`App.jsx`](./src/App.jsx) and [`App.css`](./src/App.css) files in the `src` directory.

@@ -4,8 +4,8 @@ const DEFAULT_CONTEXT = {
   metaplex: null,
 };
 
-export const MetaplexContext = createContext(DEFAULT_CONTEXT);
+export const TrezoaplexContext = createContext(DEFAULT_CONTEXT);
 
-export function useMetaplex() {
-  return useContext(MetaplexContext);
+export function useTrezoaplex() {
+  return useContext(TrezoaplexContext);
 }

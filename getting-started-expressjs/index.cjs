@@ -1,18 +1,18 @@
 const {
-  Metaplex,
+  Trezoaplex,
   keypairIdentity,
   bundlrStorage,
-} = require("@metaplex-foundation/js");
+} = require("@trezoaplex-foundation/js");
 const {
   Connection,
   clusterApiUrl,
   PublicKey,
   Keypair,
-} = require("@solana/web3.js");
+} = require("@trezoa/web3.js");
 const fs = require("fs");
 const express = require("express");
 
-const pathToMyKeypair = process.env.HOME + "/.config/solana/id.json";
+const pathToMyKeypair = process.env.HOME + "/.config/trezoa/id.json";
 const keypairFile = fs.readFileSync(pathToMyKeypair);
 const secretKey = Buffer.from(JSON.parse(keypairFile.toString()));
 const keypair = Keypair.fromSecretKey(secretKey);
@@ -20,7 +20,7 @@ const keypair = Keypair.fromSecretKey(secretKey);
 const app = express();
 
 const connection = new Connection(clusterApiUrl("devnet"));
-const metaplex = Metaplex.make(connection)
+const metaplex = Trezoaplex.make(connection)
   .use(keypairIdentity(keypair))
   .use(bundlrStorage({ address: "https://devnet.bundlr.network" }));
 
