@@ -24,7 +24,7 @@ This exatple has been generated using the following steps:
 
    ```js
    const DEFAULT_CONTEXT = {
-     metaplex: null,
+     trezoaplex: null,
    };
 
    export const TrezoaplexContext = createContext(DEFAULT_CONTEXT);
@@ -43,13 +43,13 @@ This exatple has been generated using the following steps:
      const { connection } = useConnection();
      const wallet = useWallet();
 
-     const metaplex = useMemo(
+     const trezoaplex = useMemo(
        () => Trezoaplex.make(connection).use(walletAdapterIdentity(wallet)),
        [connection, wallet]
      );
 
      return (
-       <TrezoaplexContext.Provider value={{ metaplex }}>
+       <TrezoaplexContext.Provider value={{ trezoaplex }}>
          {children}
        </TrezoaplexContext.Provider>
      );
@@ -63,7 +63,7 @@ This exatple has been generated using the following steps:
    The `ShowNFTs` component is responsible for retrieving, picking and showing a random NFT from the connected wallet.
 
    ```js
-   const myAssets = await metaplex.nfts().findAllByOwner({ owner: metaplex.identity().publicKey });
+   const myAssets = await trezoaplex.nfts().findAllByOwner({ owner: trezoaplex.identity().publicKey });
 
 
    if(!myAssets.length) {
@@ -72,7 +72,7 @@ This exatple has been generated using the following steps:
    }
 
    const randIdx = Math.floor(Math.random() * myAssets.length);
-   const nft = await metaplex.nfts().load({ metadata: myAssets[randIdx] });
+   const nft = await trezoaplex.nfts().load({ metadata: myAssets[randIdx] });
    setNft(nft);
    ```
 

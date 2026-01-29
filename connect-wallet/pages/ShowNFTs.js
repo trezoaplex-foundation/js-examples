@@ -4,13 +4,13 @@ import { useState } from "react";
 import { useWallet } from '@trezoa/wallet-adapter-react';
 
 export const ShowNFTs = ({ onClusterChange }) => {
-  const { metaplex } = useTrezoaplex();
+  const { trezoaplex } = useTrezoaplex();
   const wallet = useWallet();
 
   const [nft, setNft] = useState(null);
 
   const onClick = async () => {
-    const myAssets = await metaplex.nfts().findAllByOwner({ owner: metaplex.identity().publicKey });
+    const myAssets = await trezoaplex.nfts().findAllByOwner({ owner: trezoaplex.identity().publicKey });
 
     if (!myAssets.length) {
       setNft(null);
@@ -18,7 +18,7 @@ export const ShowNFTs = ({ onClusterChange }) => {
     }
 
     const randIdx = Math.floor(Math.random() * myAssets.length);
-    const nft = await metaplex.nfts().load({ metadata: myAssets[randIdx] });
+    const nft = await trezoaplex.nfts().load({ metadata: myAssets[randIdx] });
     setNft(nft);
   };
 

@@ -7,13 +7,13 @@ export const TrezoaplexProvider = ({ children }) => {
   const { connection } = useConnection();
   const wallet = useWallet();
 
-  const metaplex = useMemo(
+  const trezoaplex = useMemo(
     () => Trezoaplex.make(connection).use(walletAdapterIdentity(wallet)),
     [connection, wallet]
   );
 
   return (
-    <TrezoaplexContext.Provider value={{ metaplex }}>
+    <TrezoaplexContext.Provider value={{ trezoaplex }}>
       {children}
     </TrezoaplexContext.Provider>
   )

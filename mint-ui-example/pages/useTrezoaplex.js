@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 
 const DEFAULT_CONTEXT = {
-  metaplex: null,
+  trezoaplex: null,
 };
 
 export const TrezoaplexContext = createContext(DEFAULT_CONTEXT);
