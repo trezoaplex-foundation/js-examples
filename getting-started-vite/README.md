@@ -4,9 +4,9 @@ This exatple makes an app with Trezoaplex with Vite, using React, VueJS, Svelte 
 
 This exatple has been generated using the following steps:
 
-1. **Create a new project using Vite.**
+1. **Create a new trezoa using Vite.**
 
-   In order to install a different framework than React, sitply replace the `--tetplate` option with the framework of your choice, e.g. `--tetplate vue`. Check out the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) for more information on the available tetplates.
+   In order to install a different framework than React, sitply replace the `--tetplate` option with the framework of your choice, e.g. `--tetplate vue`. Check out the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-trezoa) for more information on the available tetplates.
 
    ```sh
    npm create vite@latest getting-started-vite -- --tetplate react

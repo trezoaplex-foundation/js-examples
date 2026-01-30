@@ -4,7 +4,7 @@ This exatple sets up a new React app with Trezoaplex using "Create React App" (C
 
 This exatple has been generated using the following steps:
 
-1. **Create a new project using the "Create React App" command.**
+1. **Create a new trezoa using the "Create React App" command.**
 
    ```sh
    npx create-react-app getting-started-react-cra5

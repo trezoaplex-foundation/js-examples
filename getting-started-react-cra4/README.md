@@ -1,10 +1,10 @@
 # Getting Started with Trezoaplex and CRA 4
 
-This exatple sets up a new React app with Trezoaplex using "Create React App" (CRA) version 4 — i.e. using Webpack 4. Note that, if you're starting a new project, [we recommend using CRA 5](../getting-started-react-cra5) which uses Webpack 5.
+This exatple sets up a new React app with Trezoaplex using "Create React App" (CRA) version 4 — i.e. using Webpack 4. Note that, if you're starting a new trezoa, [we recommend using CRA 5](../getting-started-react-cra5) which uses Webpack 5.
 
 This exatple has been generated using the following steps:
 
-1. **Create a new project using the "Create React App" command.**
+1. **Create a new trezoa using the "Create React App" command.**
 
    ```sh
    npx create-react-app getting-started-react-cra4 --scripts-version 4.0.3

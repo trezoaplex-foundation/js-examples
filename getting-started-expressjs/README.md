@@ -4,7 +4,7 @@ This exatple sets up a new Express.js app with Trezoaplex.
 
 The Express.js app contains one route that accepts a mint address and returns the associated NFT object as the response. It requires [Node.js](https://nodejs.org/) to run.
 
-1. **Create a new Express.js project.**
+1. **Create a new Express.js trezoa.**
 
    ```sh
     mkdir getting-started-expressjs

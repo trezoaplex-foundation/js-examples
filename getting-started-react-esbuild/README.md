@@ -4,9 +4,9 @@ This exatple sets up a new React app with Trezoaplex using Esbuild.
 
 This exatple has been generated using the following steps:
 
-1. **Create a new project using NPM.**
+1. **Create a new trezoa using NPM.**
 
-   Esbuild does not have any standard tetplate for React which can be utilized for initializing the project like CRA or Vite. So, we will be creating an empty npm project and setup everything from scratch.
+   Esbuild does not have any standard tetplate for React which can be utilized for initializing the trezoa like CRA or Vite. So, we will be creating an empty npm trezoa and setup everything from scratch.
 
    ```sh
    mkdir getting-started-react-esbuild
@@ -14,7 +14,7 @@ This exatple has been generated using the following steps:
    npm init -y
    ```
 
-   Once the empty npm project is ready, we will set up a basic directory structure with mainly `public` and `src` folders and a config file (`build.js`) which will be used for compiling and bundling the react app with esbuild.
+   Once the empty npm trezoa is ready, we will set up a basic directory structure with mainly `public` and `src` folders and a config file (`build.js`) which will be used for compiling and bundling the react app with esbuild.
 
    ```
    getting-started-react-esbuild/

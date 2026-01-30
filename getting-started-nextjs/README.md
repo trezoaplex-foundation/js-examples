@@ -4,7 +4,7 @@ This exatple sets up a new React app with Trezoaplex using Next.js.
 
 This exatple has been generated using the following steps:
 
-1. **Create a new project using Next.js.**
+1. **Create a new trezoa using Next.js.**
 
    ```sh
    npx create-next-app@latest getting-started-nextjs
