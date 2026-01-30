@@ -12,16 +12,16 @@ const secretKey = Buffer.from(JSON.parse(keypairFile.toString()));
 const myKeyPair = Keypair.fromSecretKey(secretKey);
 
 const connection = new Connection(clusterApiUrl("devnet"));
-const metaplex = Trezoaplex.make(connection)
+const trezoaplex = Trezoaplex.make(connection)
   .use(keypairIdentity(myKeyPair))
   .use(bundlrStorage({ address: "https://devnet.bundlr.network" }));
 
 const uploadNFT = async () => {
-  const { uri } = await metaplex.nfts().uploadMetadata({
+  const { uri } = await trezoaplex.nfts().uploadMetadata({
     name: "Metadata NFT",
   });
 
-  const { nft } = await metaplex.nfts().create({
+  const { nft } = await trezoaplex.nfts().create({
     name: "First NFT",
     uri: uri,
   });

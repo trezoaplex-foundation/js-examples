@@ -20,7 +20,7 @@ const keypair = Keypair.fromSecretKey(secretKey);
 const app = express();
 
 const connection = new Connection(clusterApiUrl("devnet"));
-const metaplex = Trezoaplex.make(connection)
+const trezoaplex = Trezoaplex.make(connection)
   .use(keypairIdentity(keypair))
   .use(bundlrStorage({ address: "https://devnet.bundlr.network" }));
 
@@ -34,7 +34,7 @@ app.get("/getNFT", async (req, res) => {
   }
 
   try {
-    const nft = await metaplex.nfts().findByMint({ mintAddress: new PublicKey(mintAddress) });
+    const nft = await trezoaplex.nfts().findByMint({ mintAddress: new PublicKey(mintAddress) });
     res.json(nft);
   } catch (err) {
     res.send(err);
